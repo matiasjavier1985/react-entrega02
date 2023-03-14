@@ -45,7 +45,7 @@ import { SlSocialFacebook,SlSocialInstagram } from "react-icons/sl";
 import { ImWhatsapp } from "react-icons/im";
 import { NavLink } from 'react-router-dom';
 
-//import logo from '/assets/img/logo-malka.png'
+import logo from '/assets/img/logo.jpg'
 
 export default function navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -72,7 +72,6 @@ export default function navbar() {
         } 
     },[])
 
-
     return (
     <div className={`isolate bg-white fixed inset-x-0 top-0 ${verNav} z-10`}>
         <div className='bg-blue-500 pb-1 px-6 pt-3 lg:px-8 hidden lg:flex lg:justify-between'>
@@ -90,8 +89,8 @@ export default function navbar() {
             <nav className="flex items-center justify-between" aria-label="Global">
                 <div className="flex lg:flex-1">
                     <NavLink to={'/'} className="-m-1.5 p-1.5">
-                            <span className="sr-only">MALKA</span>
-                            {/* <img className="w-[100px] overflow-hidden shadow-md shadow-gray-500" src={logo} alt="MALKA" /> */}
+                            <span className="sr-only">BIKESHOP</span>
+                            <img className="w-[100px] overflow-hidden shadow-md shadow-gray-500" src={logo} alt="BIKESHOP" /> 
                     </NavLink>
                 </div>
                 <CartWidget cantidad="9" widget="hidden"/>
