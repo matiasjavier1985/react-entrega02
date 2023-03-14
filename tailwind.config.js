@@ -1,8 +1,7 @@
 export default {
-    content: ['./.html', './src//.{vue,js,ts,jsx,tsx,css}'],
+    content: ['./*.html', './src/**/*.{vue,js,ts,jsx,tsx,css}'],
     theme: {
-        extend: {
-        },
+        
         screens:{
             'xs':'425px',
                 // => @media (min-width: 425px) { ... }

@@ -35,158 +35,211 @@
 //     )
 // }
 // export default NavBar
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import CartWidget from '../cartWidget';
 
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-]
+import { Fragment, useEffect, useRef, useState } from 'react'
+import { Dialog,Menu,Transition  } from '@headlessui/react'
+import { HiOutlineMenu,HiOutlineX,HiHome,HiUserCircle } from "react-icons/hi";
+import { GiClothes } from "react-icons/gi";
+import { SlSocialFacebook,SlSocialInstagram } from "react-icons/sl";
+import { ImWhatsapp } from "react-icons/im";
+import { NavLink } from 'react-router-dom';
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+//import logo from '/assets/img/logo-malka.png'
 
-export default function NavBar() {
-  return (
-    <Disclosure as="nav" className="bg-gray-800">
-      {({ open }) => (
-        <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-900 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-5 lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+export default function navbar() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [verNav,setVerNav]=useState("show")
+    const [buscar,setBuscar]=useState('')
 
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Sign out
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              </div>
+    const categorias=['Calza','Conjunto','Biker','Capri'];
+
+    const handleChange = (event) => {
+        setBuscar(event.target.value);
+    }
+
+    let scrollPosc = window.pageYOffset;
+
+    useEffect(()=>{
+        window.onscroll = function() {
+            let actualScrollPosc = window.pageYOffset;
+            if (scrollPosc > actualScrollPosc) {
+                setVerNav("show")
+            } else {
+                setVerNav("hidden")
+            }
+            scrollPosc = actualScrollPosc
+        } 
+    },[])
+
+
+    return (
+    <div className={`isolate bg-white fixed inset-x-0 top-0 ${verNav} z-10`}>
+        <div className='bg-blue-500 pb-1 px-6 pt-3 lg:px-8 hidden lg:flex lg:justify-between'>
+            <div className='flex justify-between w-28 text-white'>
+                <a href="#facebook"><SlSocialFacebook className='h-6 w-6'/></a>
+                <a href="#insta"><SlSocialInstagram className='h-6 w-6'/></a>
+                <a href="#wp"><ImWhatsapp className='h-6 w-6'/></a>
             </div>
-          </div>
+            <CartWidget cantidad="6" widget="block"/>
+            <a href="#" className="flex text-white text-sm font-semibold leading-7">
+                <HiUserCircle className='h-7 w-7'/>
+            </a>
+        </div>
+        <div className="px-6 py-3 lg:px-8 ">
+            <nav className="flex items-center justify-between" aria-label="Global">
+                <div className="flex lg:flex-1">
+                    <NavLink to={'/'} className="-m-1.5 p-1.5">
+                            <span className="sr-only">MALKA</span>
+                            {/* <img className="w-[100px] overflow-hidden shadow-md shadow-gray-500" src={logo} alt="MALKA" /> */}
+                    </NavLink>
+                </div>
+                <CartWidget cantidad="9" widget="hidden"/>
+                {/* Boton hamburguesa */}
+                <div className="flex lg:hidden">
+                    <button
+                        type="button"
+                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                        onClick={() => setMobileMenuOpen(true)}
+                    >
+                        <span className="sr-only">Abrir Menu</span>
+                        <HiOutlineMenu className="text-blue-700 h-6 w-6" aria-hidden="true" />
+                    </button>
+                </div>
+                {/* Opciones del nav */}
+                <div className="hidden lg:flex lg:gap-x-12">
+                    <NavLink to={'/'} className="uppercase text-sm font-semibold leading-6 text-gray-900">
+                        Inicio
+                    </NavLink>
+                    <Menu as="div" className="relative inline-block text-left">
+                        <div>
+                            <Menu.Button className="uppercase inline-flex text-sm font-semibold leading-6 text-gray-900">
+                                Productos
+                            </Menu.Button>
+                        </div>
+                        <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                        >
+                            <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                {categorias.map((ropa)=>{
+                                    return(
+                                        <div key={ropa} className="px-1 py-1 ">
+                                            <Menu.Item>
+                                                {({ active }) => (
+                                                    <NavLink to={`/category/${ropa}`}>
+                                                        <button
+                                                            className={`${
+                                                            active ? 'bg-blue-500 text-white' : 'text-gray-900'
+                                                            } group flex w-full items-center rounded-md px-2 py-2 text-sm uppercase`}
+                                                        >
+                                                        {ropa}
+                                                        </button>
+                                                    </NavLink>
+                                                    
+                                                )}
+                                            </Menu.Item>
+                                        </div>
+                                    )
+                                })}
+                            </Menu.Items>
+                        </Transition>
+                    </Menu>
+                    
+                </div>
+                <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                    <input className=" rounded-full block w-60 bg-gray-300 py-4 pl-4 pr-12 text-slate-900 placeholder:text-slate-600 sm:text-sm sm:leading-6" placeholder="Buscar..." aria-label="Buscar ropa" type="text" value={buscar} onChange={handleChange}/>
+                </div>
+            </nav>
+            {/* Modo movil */}
+            <Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+                <Dialog.Panel className="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-3 lg:hidden">
+                <div className="flex items-center justify-between">
+                    <a href="#" className="-m-1.5 p-1.5">
+                        <span className="sr-only">MALKA</span>
+                        {/* <img className="w-[100px]" src={logo} alt="MALKA" /> */}
+                    </a>
+                    <CartWidget cantidad="9"/>
+                    <button
+                        type="button"
+                        className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                        onClick={() => setMobileMenuOpen(false)}
+                        >
+                        <span className="sr-only">Close menu</span>
+                        <HiOutlineX className="text-blue-700 text-blue-500 h-6 w-6" aria-hidden="true" />
+                    </button>
+                </div>
+                <div className="mt-6 flow-root">
+                    <div className="-my-6 divide-y divide-gray-500/10">
+                    <div className="w-full space-y-2 py-6">
+                        <NavLink to={'/'} className="-mx-3 flex rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 uppercase">
+                                <HiHome className="text-blue-700 h-6 w-6 mr-2"/>
+                                <p>Inicio</p>
+                        </NavLink>
+                        
+                        <Menu as="div" className="w-full inline-block text-left">
+                        <div className='w-full '>
+                            <Menu.Button className="w-full py-3 rounded-lg inline-flex text-base font-semibold leading-7 text-gray-900 uppercase">
+                                <GiClothes className="text-blue-700 h-6 w-6 mr-2"/> <p>Productos</p>
+                            </Menu.Button>
+                        </div>
+                        <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                        >
+                            <Menu.Items className=" w-56 origin-top-right divide-y divide-gray-400 rounded-md bg-transparent shadow-lg ring-2 ring-black ring-opacity-10 focus:outline-none">
+                                {categorias.map((ropa)=>{
+                                        return(
+                                            <div key={ropa} className="px-1 py-1 ">
+                                                <Menu.Item>
+                                                    {({ active }) => (
+                                                        <NavLink to={`/category/${ropa}`}>
+                                                            <button
+                                                                className={`${
+                                                                active ? 'bg-blue-500 text-white' : 'text-gray-900'
+                                                                } group flex w-full items-center rounded-md px-2 py-2 text-sm uppercase`}
+                                                            >
+                                                            {ropa}
+                                                            </button>
+                                                        </NavLink>
+                                                        
+                                                    )}
+                                                </Menu.Item>
+                                            </div>
+                                        )
+                                    })}
+                            </Menu.Items>
+                        </Transition>
+                    </Menu>
 
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block rounded-md px-3 py-2 text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
-  )
+                    </div>
+                    <div className='pb-4 border-none'>
+                        <input className="rounded-full block w-full bg-gray-300 py-4 pl-4 pr-12 text-slate-900 placeholder:text-slate-600 sm:text-sm sm:leading-6" placeholder="Buscar..." aria-label="Buscar ropa" type="text" value={buscar} onChange={handleChange}/>
+                    </div>
+                    <div className="py-6">
+                        <a
+                        href="#"
+                        className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                        >
+                        Log in
+                        </a>
+                    </div>
+                    </div>
+                </div>
+                </Dialog.Panel>
+            </Dialog>
+        </div>
+        <hr className='border-gray-400'/>
+    </div>
+    )
 }
