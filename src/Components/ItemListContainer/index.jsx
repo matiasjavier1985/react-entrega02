@@ -1,17 +1,34 @@
-function Lista({nombre}) {
+import { useEffect, useState } from "react"
+import ItemList from "../itemList";
+
+function Contenedor({marca,isRoute}) {
+    const [bike,setBike]= useState([])
+
+   useEffect(()=>{
+    fetch("/mocks/bikes.json")
+    .then((res)=> res.json())
+    .then ((datos)=>{
+        
+        setTimeout(() => {
+            
+            if (isRoute){
+                const bikefilter = datos.filter((prod)=>{
+                    console.log(prod.brand == marca) 
+                    return prod.brand == marca;})
+
+                setBike(bikefilter)
+            }else{setBike(datos)}
+        },2000);
+    })
+   },[])
+
     return(
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {nombre}
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Trek</a></li>
-                <li><a class="dropdown-item" href="#">KTM</a></li>
-                <li><a class="dropdown-item" href="#">Vairo</a></li>
-                <li><a class="dropdown-item" href="#">SPL</a></li>                
-            </ul>
-            </li>
+        <div className="mt-44"><p>oooooooo</p>
+
+            <ItemList info={bike}/>
+        </div>
+       
     )
 }
 
-export default Lista
+export default Contenedor
