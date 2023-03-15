@@ -25,7 +25,7 @@ function Contenedordetalle({idDetalle}) {
    },[])
    console.log(bike);
     return(
-        <div className="mt-44">
+        <div className="mt-44 container-fluid">
             <ItemDetail infoDetalle={bike}/>
         </div>
        

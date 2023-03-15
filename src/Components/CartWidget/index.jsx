@@ -1,7 +1,8 @@
+import { BsCart } from "react-icons/bs";
 function CartWidget({cant}) {
     return(
         
-    <div>k</div>
+    <div><BsCart/></div>
     )
 }
 export default CartWidget
