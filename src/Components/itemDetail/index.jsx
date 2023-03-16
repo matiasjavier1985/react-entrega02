@@ -1,14 +1,4 @@
-// export default function itemDetail({infoDetalle}) {
-//     const {brand,model,price,img}= infoDetalle
-//     return (
-//         <div>
-//           <h1>{brand}</h1>
-//           <h2>{model}</h2>
-//           <h2>{price}</h2>
-//           <img src={img} alt="BICIS"/>
-//         </div>
-//     )
-// }
+
 import { useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
@@ -54,12 +44,13 @@ const product = {
     { name: '2XL', inStock: true },
   ],
   description:
-    'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
+    'La Marlin  5 es una bicicleta preparada para trail, ideal para las aventuras del día a día, ya sea por senderos o fuera de ellos. La horquilla de suspensión, la transmisión 2x8 y los soportes para el portabultos y la pata de cabra la convierten en la elección ideal para los ciclistas que se inician en el trail o para aquellos que buscan una bicicleta cómoda y estable para moverse por la ciudad con la robustez de una auténtica bicicleta de montaña.',
   highlights: [
-    'Hand cut and sewn locally',
-    'Dyed with our proprietary colors',
-    'Pre-washed & pre-shrunk',
-    'Ultra-soft 100% cotton',
+    
+    'Compra con confianza 800+ reseñas: 4.5 de 5',
+    'Garantía precio bajo inmediato por chat',
+    'Devoluciones Gratis hasta 30 días',
+    'Envío Gratis en compras desde $1,000',
   ],
   details:
     'Si tienes alguna pregunta sobre productos o tú compra, visita nuestra página de servicio al cliente. Aquí encontraras los detalles de nuestra empresa, respuestas a las preguntas más frecuentes y diferentes formas de ponerse en contacto con nosotros',
