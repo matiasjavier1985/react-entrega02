@@ -4,7 +4,7 @@ import CartWidget from '../cartWidget';
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { Dialog,Menu,Transition  } from '@headlessui/react'
 import { HiOutlineMenu,HiOutlineX,HiHome,HiUserCircle } from "react-icons/hi";
-import { GiClothes } from "react-icons/gi";
+import { GrBike } from "react-icons/gr";
 import { SlSocialFacebook,SlSocialInstagram } from "react-icons/sl";
 import { ImWhatsapp } from "react-icons/im";
 import { NavLink } from 'react-router-dom';
@@ -38,8 +38,8 @@ export default function navbar() {
 
     return (
     <div className={`isolate bg-white fixed inset-x-0 top-0 ${verNav} z-10`}>
-        <div className='bg-gray-500 pb-1 px-6 pt-3 lg:px-8 hidden lg:flex lg:justify-between'>
-            <div className='flex justify-between w-28 text-white'>
+        <div className='bg-white  pb-1 px-6 pt-3 lg:px-8 hidden lg:flex lg:justify-between'>
+            <div className='flex justify-between  w-28 text-indigo-800'>
                 <a href="#facebook"><SlSocialFacebook className='h-6 w-6'/></a>
                 <a href="#insta"><SlSocialInstagram className='h-6 w-6'/></a>
                 <a href="#wp"><ImWhatsapp className='h-6 w-6'/></a>
@@ -57,7 +57,7 @@ export default function navbar() {
                             <img className="w-[100px] overflow-hidden" src={logo} alt="BIKESHOP" /> 
                     </NavLink>
                 </div>
-                <CartWidget cantidad="9" widget="hidden"/>
+                {/* <CartWidget cantidad="9" widget="hidden"/> */}
                 {/* Boton hamburguesa */}
                 <div className="flex lg:hidden">
                     <button
@@ -79,7 +79,7 @@ export default function navbar() {
                             <Menu.Button className="uppercase inline-flex text-sm font-semibold leading-6 text-gray-900">
                                 Productos
                             </Menu.Button>
-                        </div>
+                            </div>
                         <Transition
                         as={Fragment}
                         enter="transition ease-out duration-100"
@@ -116,7 +116,7 @@ export default function navbar() {
                     
                 </div>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                    <input className=" rounded-full block w-60 bg-gray-300 py-4 pl-4 pr-12 text-slate-900 placeholder:text-slate-600 sm:text-sm sm:leading-6" placeholder="Buscar..." aria-label="Buscar ropa" type="text" value={buscar} onChange={handleChange}/>
+                    <input className=" rounded-lg block w-60 bg-gray-300 py-4 pl-4 pr-12 text-slate-900 placeholder:text-slate-600 sm:text-sm sm:leading-6" placeholder={`Que 🚴 estas buscando...`} aria-label="Buscar ropa" type="text" value={buscar} onChange={handleChange}/>
                 </div>
             </nav>
             {/* Modo movil */}
@@ -148,7 +148,7 @@ export default function navbar() {
                         <Menu as="div" className="w-full inline-block text-left">
                         <div className='w-full '>
                             <Menu.Button className="w-full py-3 rounded-lg inline-flex text-base font-semibold leading-7 text-gray-900 uppercase">
-                                <GiClothes className="text-blue-700 h-6 w-6 mr-2"/> <p>Productos</p>
+                                <GrBike className="text-blue-700 h-6 w-6 mr-2"/><p>Productos</p>
                             </Menu.Button>
                         </div>
                         <Transition
@@ -187,7 +187,7 @@ export default function navbar() {
 
                     </div>
                     <div className='pb-4 border-none'>
-                        <input className="rounded-full block w-full bg-gray-300 py-4 pl-4 pr-12 text-slate-900 placeholder:text-slate-600 sm:text-sm sm:leading-6" placeholder="Buscar..." aria-label="Buscar ropa" type="text" value={buscar} onChange={handleChange}/>
+                        <input className="rounded-lg shadow-inner block w-full bg-gray-100 py-4 pl-4 pr-12 text-slate-900 placeholder:text-slate-600 sm:text-sm sm:leading-6" placeholder="Que estas buscando..." aria-label="Buscar bicicletas" type="text" value={buscar} onChange={handleChange}/>
                     </div>
                     <div className="py-6">
                         <a

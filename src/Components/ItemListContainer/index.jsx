@@ -23,7 +23,7 @@ function Contenedor({marca,isRoute}) {
    },[marca])
 
     return(
-        <div className="container-fluid mt-44 ">
+        <div className="container-fluid mt-44">
            <ItemList info={bike}/>
         </div>
        

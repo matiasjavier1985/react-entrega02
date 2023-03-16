@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
-
+import { GrBike } from "react-icons/gr";
 const product = {
   name: 'Basic Tee 6-Pack',
   price: '$192',
@@ -36,12 +36,12 @@ const product = {
     { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
   ],
   sizes: [
-    { name: 'XS', inStock: true },
+
     { name: 'S', inStock: true },
     { name: 'M', inStock: true },
     { name: 'L', inStock: true },
     { name: 'XL', inStock: true },
-    { name: '2XL', inStock: true },
+    
   ],
   description:
     'La Marlin  5 es una bicicleta preparada para trail, ideal para las aventuras del día a día, ya sea por senderos o fuera de ellos. La horquilla de suspensión, la transmisión 2x8 y los soportes para el portabultos y la pata de cabra la convierten en la elección ideal para los ciclistas que se inician en el trail o para aquellos que buscan una bicicleta cómoda y estable para moverse por la ciudad con la robustez de una auténtica bicicleta de montaña.',
@@ -241,7 +241,7 @@ export default function itemDetail({infoDetalle}) {
               </div>
 
               <button type="submit"className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                Comprar
+                Comprar <GrBike className='2xl text-gray-100'/>
               </button>
             </form>
           </div>
