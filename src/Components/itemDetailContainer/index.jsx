@@ -1,6 +1,6 @@
 import ItemDetail from "../itemDetail";
 import { useEffect, useState } from "react"
-import {getFirestore}from "firebase/firestore"
+import {doc, getDoc, getFirestore}from "firebase/firestore"
 function Contenedordetalle({idDetalle}) {
     const [bike,setBike]= useState([])
 

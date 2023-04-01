@@ -161,12 +161,12 @@ export default function navbar() {
                         leaveTo="transform opacity-0 scale-95"
                         >
                             <Menu.Items className=" w-56 origin-top-right divide-y divide-gray-400 rounded-md bg-transparent shadow-lg ring-2 ring-black ring-opacity-10 focus:outline-none">
-                                {categorias.map((ropa)=>{
+                                {categorias.map((bike)=>{
                                         return(
-                                            <div key={ropa} className="px-1 py-1 ">
+                                            <div key={bike} className="px-1 py-1 ">
                                                 <Menu.Item>
                                                     {({ active }) => (
-                                                        <NavLink to={`/category/${ropa}`}>
+                                                        <NavLink to={`/category/${bike}`}>
                                                             <button
                                                                 className={`${
                                                                 active ? 'bg-blue-500 text-white' : 'text-gray-900'

@@ -3,48 +3,24 @@ import { useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { GrBike } from "react-icons/gr";
+
 const product = {
-  name: 'Basic Tee 6-Pack',
-  price: '$192',
-  href: '#',
-  breadcrumbs: [
-    { id: 1, name: 'Men', href: '#' },
-    { id: 2, name: 'Clothing', href: '#' },
-  ],
-  images: [
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-      alt: 'Model wearing plain black basic tee.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-      alt: 'Model wearing plain gray basic tee.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-      alt: 'Model wearing plain white basic tee.',
-    },
-  ],
+ 
   colors: [
     { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
     { name: 'Red', class: 'bg-red-600', selectedClass: 'ring-gray-400' },
     { name: 'Blue', class: 'bg-blue-600', selectedClass: 'ring-gray-400' },
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
+    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-400' },
   ],
   sizes: [
 
-    { name: 'S', inStock: true },
+    { name: 'S', inStock: false},
     { name: 'M', inStock: true },
     { name: 'L', inStock: true },
     { name: 'XL', inStock: true },
     
   ],
-  description:
-    'La Marlin  5 es una bicicleta preparada para trail, ideal para las aventuras del día a día, ya sea por senderos o fuera de ellos. La horquilla de suspensión, la transmisión 2x8 y los soportes para el portabultos y la pata de cabra la convierten en la elección ideal para los ciclistas que se inician en el trail o para aquellos que buscan una bicicleta cómoda y estable para moverse por la ciudad con la robustez de una auténtica bicicleta de montaña.',
+
   highlights: [
     
     'Compra con confianza 800+ reseñas: 4.5 de 5',
@@ -55,14 +31,14 @@ const product = {
   details:
     'Si tienes alguna pregunta sobre productos o tú compra, visita nuestra página de servicio al cliente. Aquí encontraras los detalles de nuestra empresa, respuestas a las preguntas más frecuentes y diferentes formas de ponerse en contacto con nosotros',
 }
-const reviews = { href: '#', average: 4, totalCount: 117 }
+const reviews = { href: '#', average:2, totalCount: 115 }
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function itemDetail({infoDetalle}) {
-  const {id,brand,model,price,img}= infoDetalle
+  const {id,brand,model,price,img,description,rolled}= infoDetalle
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
 
@@ -90,18 +66,18 @@ export default function itemDetail({infoDetalle}) {
               </li>
             <li className="text-sm">
               <a href="#" aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                {model}
+                {model}          
               </a>
             </li>
           </ol>
         </nav>
-
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-4 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
             {/* Image gallery */}
             <div className="mt-6 sm:px-6 lg:max-w-7xl lg:px-8 w-96">
                 <div className="lg:pr-8">
                     <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{brand}</h1>
+                    <h2 className="text-xl tracking-tight text-gray-600 sm:text-3xl">{model} {rolled}</h2>
                 </div>
                 <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
                     <img
@@ -110,13 +86,17 @@ export default function itemDetail({infoDetalle}) {
                     className="h-full w-full object-cover object-center"
                     />
                 </div>
+                <div>
+              <div>
+                <p className="text-base text-red-900 border">{description}</p>
+              </div>
+            </div>
             </div>
 
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0 lg:col-span-2 lg:col-start-3">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">$ {price} pesos</p>
-
+            <p className="text-3xl tracking-tight text-gray-900">💲{price} Pesos</p>
             {/* Reviews */}
             <div className="mt-6">
               <h3 className="sr-only">Reviews</h3>
@@ -249,7 +229,7 @@ export default function itemDetail({infoDetalle}) {
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
             {/* Description and details */}
             <div>
-              <h3 className="sr-only">Description</h3>
+              <h3 className="sr-only"></h3>
 
               <div className="space-y-6">
                 <p className="text-base text-gray-900">{product.description}</p>
