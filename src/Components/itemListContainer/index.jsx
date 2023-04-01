@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import ItemList from "../itemList";
-
+import { collection, getDocs, getFirestore, query, where }from "firebase/firestore"
 function Contenedor({marca,isRoute}) {
     const [bike,setBike]= useState([])
 
@@ -9,12 +9,12 @@ function Contenedor({marca,isRoute}) {
         const itemsCollection = collection(db, 'items')
 
         if (isRoute) {
-            const bike = query(itemsCollection, where('marca', '==' , marca))
+            const q = query(itemsCollection, where('marca', '==' , marca))
             
-            getDocs(bike)
+            getDocs(q)
             .then((snapshot)=>{
                 const docs = snapshot.docs
-                setProducts(docs.map((doc)=>({id:doc.id, ...doc.data()} )))
+                setBike(docs.map((doc)=>({id:doc.id, ...doc.data()} )))
 
             }).catch((error)=>console.log(error))
         }
@@ -22,7 +22,7 @@ function Contenedor({marca,isRoute}) {
             getDocs(itemsCollection)
             .then((snapshot)=>{
                 const docs = snapshot.docs
-                    setProducts(docs.map((doc)=>({id:doc.id, ...doc.data()} )))
+                    setBike(docs.map((doc)=>({id:doc.id, ...doc.data()} )))
             }).catch((error)=>console.log(error))
         }
    },[marca])

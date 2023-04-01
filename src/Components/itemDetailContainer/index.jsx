@@ -1,28 +1,20 @@
 import ItemDetail from "../itemDetail";
 import { useEffect, useState } from "react"
-
+import {getFirestore}from "firebase/firestore"
 function Contenedordetalle({idDetalle}) {
     const [bike,setBike]= useState([])
 
-   useEffect(()=>{
-    fetch("/mocks/bikes.json")
-    .then((res)=> res.json())
-    .then ((datos)=>{
-        
-        setTimeout(() => {
-            
-                const bikefilter = datos.find((prod)=>{
-                    console.log(prod.id == idDetalle) 
-                    return prod.id == idDetalle;})
+    useEffect(()=>{
+        const db = getFirestore()
+        const itemRef = doc(db,'items',idDetalle);
 
-                console.log(bikefilter);
-                setBike(bikefilter)
-            
-        },2000);
- 
-    })
-    
-   },[])
+        getDoc(itemRef).then((snapshot)=>{
+            if (snapshot.exists()) {
+                setBike({id:snapshot.id, ...snapshot.data()})
+                console.log(snapshot.data());
+            }
+        }).catch((error)=>console.log(error))
+    },[])
    console.log(bike);
     return(
         <div className="mt-44 container-fluid">
