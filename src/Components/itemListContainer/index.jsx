@@ -9,12 +9,13 @@ function Contenedor({marca,isRoute}) {
         const itemsCollection = collection(db, 'items')
 
         if (isRoute) {
-            const q = query(itemsCollection, where('marca', '==' , marca))
+            const q = query(itemsCollection, where('brand', '==' , marca))
             
             getDocs(q)
             .then((snapshot)=>{
                 const docs = snapshot.docs
                 setBike(docs.map((doc)=>({id:doc.id, ...doc.data()} )))
+                console.log(docs);
 
             }).catch((error)=>console.log(error))
         }

@@ -1,8 +1,9 @@
 
 
-import NavBar from "../navBar"
-import ItemListContainer from "../itemListContainer"
+import NavBar from "../Components/navBar"
+import ItemListContainer from "../Components/itemListContainer"
 import { useParams } from "react-router-dom"
+import { CartContextProvider } from "../context/CartContext"
 
 function App() {
   const params = useParams()
@@ -10,9 +11,10 @@ function App() {
 
   return (
     <div>
+       <CartContextProvider>
         <NavBar/>
         <ItemListContainer marca={params.id} isRoute={isRoute}/>
-        
+        </CartContextProvider>
     </div>
   )
 }

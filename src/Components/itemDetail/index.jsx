@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { GrBike } from "react-icons/gr";
-
+import { useCartContext} from "../../context/CartContext";
 const product = {
  
   colors: [
@@ -41,6 +41,7 @@ export default function itemDetail({infoDetalle}) {
   const {id,brand,model,price,img,description,rolled}= infoDetalle
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+  const {agregarBike} = useCartContext()
 
   return (
     <div className="bg-white">
@@ -120,11 +121,10 @@ export default function itemDetail({infoDetalle}) {
               </div>
             </div>
 
-            <form className="mt-10">
+            <div className="mt-10">
               {/* Colors */}
               <div>
                 <h3 className="text-sm font-medium text-gray-900">Color</h3>
-
                 <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
                   <RadioGroup.Label className="sr-only"> Choose a color </RadioGroup.Label>
                   <div className="flex items-center space-x-3">
@@ -220,10 +220,10 @@ export default function itemDetail({infoDetalle}) {
                 </RadioGroup>
               </div>
 
-              <button type="submit"className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <button onClick={()=>agregarBike(infoDetalle)} className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 Comprar <GrBike className='2xl text-gray-100'/>
               </button>
-            </form>
+            </div>
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">

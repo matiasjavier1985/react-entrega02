@@ -5,9 +5,9 @@ import {
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import Root from './Components/routes/root'
+import Root from './routes/root'
 import "./index.css"
-import ItemRoot from "./Components/routes/item";
+import ItemRoot from "./routes/item";
 
 
 // Import the functions you need from the SDKs you need
