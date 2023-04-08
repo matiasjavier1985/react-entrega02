@@ -8,15 +8,31 @@ import { GrBike } from "react-icons/gr";
 import { SlSocialFacebook,SlSocialInstagram } from "react-icons/sl";
 import { ImWhatsapp } from "react-icons/im";
 import { NavLink } from 'react-router-dom';
-
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import logo from '/assets/img/fondo-logo.jpg'
 
 export default function navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [verNav,setVerNav]=useState("show")
     const [buscar,setBuscar]=useState('')
+    const [categorias,setCategorias]=useState('')
 
-    const categorias=['TREK','KTM','SPL','VENZO','VAIRO',"SPECIALIZED","SCOTT",];
+    useEffect(()=>{
+        const db = getFirestore()
+        
+        const itemsCollection = collection(db,'category')
+        getDocs(itemsCollection)
+        .then((snapshot)=>{
+            const docs = snapshot.docs
+            setCategorias(docs.map((doc)=>({id:doc.id, ...doc.data()} )))
+
+        }).catch((error)=>console.log(error))
+    },[])
+
+ console.log(categorias);
+
+
+    //const categorias=['TREK','KTM','SPL','VENZO','VAIRO',"SPECIALIZED","SCOTT",];
 
     const handleChange = (event) => {
         setBuscar(event.target.value);
@@ -92,16 +108,16 @@ export default function navbar() {
                             <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 {categorias.map((bici)=>{
                                     return(
-                                        <div key={bici} className="px-1 py-1 ">
+                                        <div key={bici.key} className="px-1 py-1 ">
                                             <Menu.Item>
                                                 {({ active }) => (
-                                                    <NavLink to={`/category/${bici}`}>
+                                                    <NavLink to={`/category/${bici.marca}`}>
                                                         <button
                                                             className={`${
                                                             active ? 'bg-blue-500 text-white' : 'text-gray-900'
                                                             } group flex w-full items-center rounded-md px-2 py-2 text-sm uppercase`}
                                                         >
-                                                        {bici}
+                                                        {bici.marca}
                                                         </button>
                                                     </NavLink>
                                                     

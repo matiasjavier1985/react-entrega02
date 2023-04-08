@@ -29,7 +29,7 @@ function footer(){
                 <div class="row mt-3">
                     <div class="col-md-3 col-xs col-md col-lg col-xl-3 mx-auto mb-4">
                         <h6 class="text-center fw-bold mb-4">BIKESHOP</h6>
-                        <img src="./assets/img/fondo-footer.jpg" class="text-center w-75" alt="">
+                        <img src="" class="text-center w-75" alt="">
                     </div>
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                         <h6 class="text-uppercase fw-bold mb-4">COMPAÑIA</h6><p>
