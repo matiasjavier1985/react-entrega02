@@ -16,7 +16,7 @@ function Contenedor({marca,isRoute}) {
             .then((snapshot)=>{
                 const docs = snapshot.docs
                 setBike(docs.map((doc)=>({id:doc.id, ...doc.data()} )))
-                console.log(docs);
+               
 
             }).catch((error)=>console.log(error))
         }
