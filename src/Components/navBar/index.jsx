@@ -15,21 +15,20 @@ export default function navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [verNav,setVerNav]=useState("show")
     const [buscar,setBuscar]=useState('')
-    const [categorias,setCategorias]=useState('')
+    const [categorias,setCategorias]=useState([])
 
     useEffect(()=>{
         const db = getFirestore()
+        const itemsCollection = collection(db,'caterogy')
+            getDocs(itemsCollection)
+            .then((snapshot)=>{
+                const docs = snapshot.docs
+                    setCategorias(docs.map((doc)=>({id:doc.id, ...doc.data()} )))
+            }).catch((error)=>console.log(error))
         
-        const itemsCollection = collection(db,'category')
-        getDocs(itemsCollection)
-        .then((snapshot)=>{
-            const docs = snapshot.docs
-            setCategorias(docs.map((doc)=>({id:doc.id, ...doc.data()} )))
+   },[])
 
-        }).catch((error)=>console.log(error))
-    },[])
-
- console.log(categorias);
+     console.log(categorias);
 
 
     //const categorias=['TREK','KTM','SPL','VENZO','VAIRO',"SPECIALIZED","SCOTT",];

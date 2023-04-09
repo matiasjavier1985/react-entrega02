@@ -6,7 +6,7 @@ import { ProdContextProvider } from '../context/ProdContext'
 
 import { useLocation, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
-
+import Footer from '../components/footer'
 
 export default function checkout() {
   const {pathname}=useLocation()
@@ -19,8 +19,10 @@ export default function checkout() {
     <ProdContextProvider>
       <CartContextProvider>
         <BarraNav/>
-        <CheckoutContainer/>  
+        <CheckoutContainer/>
+        <Footer/>  
       </CartContextProvider>
+
     </ProdContextProvider>
   )
 }
