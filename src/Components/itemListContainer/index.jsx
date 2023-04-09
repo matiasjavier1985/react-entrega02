@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import ItemList from "../itemList";
+import { HashLoader } from "react-spinners"
 import { collection, getDocs, getFirestore, query, where }from "firebase/firestore"
 function Contenedor({marca,isRoute}) {
     const [bike,setBike]= useState([])
@@ -30,7 +31,9 @@ function Contenedor({marca,isRoute}) {
 
     return(
         <div className="container-fluid mt-44">
-           <ItemList info={bike}/>
+            {bike.length!=0?<ItemList info={bike}/>:
+            <HashLoader className="mx-auto mt-28 mb-28" size={250}/>}
+           
         </div>
        
     )

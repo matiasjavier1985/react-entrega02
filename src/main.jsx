@@ -6,6 +6,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import Root from './routes/root'
+import Cart from './routes/cart'
+import Checkout from './routes/checkout'
+
 import "./index.css"
 import ItemRoot from "./routes/item";
 
@@ -13,15 +16,14 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCNfZk0yblzPQR1IogSDZrKWT8eAIqEIEY",
-  authDomain: "bikeshop-95f40.firebaseapp.com",
-  projectId: "bikeshop-95f40",
-  storageBucket: "bikeshop-95f40.appspot.com",
-  messagingSenderId: "141154442154",
-  appId: "1:141154442154:web:d458c6ee8dfb31207569d3",
-  measurementId: "G-CQCSVF0NS1"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
+  measurementId: import.meta.env.VITE_measurementId
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
@@ -42,11 +44,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/cart",
-    element: <div>HOLA MUNDO</div>,
+    element:<Cart/>,
   },
   {
     path: "/checkout",
-    element: <div>HOLA MUNDO</div>,
+    element:<Checkout/>,
   },
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(

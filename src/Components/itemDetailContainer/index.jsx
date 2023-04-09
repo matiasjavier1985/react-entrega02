@@ -1,7 +1,7 @@
 import ItemDetail from "../itemDetail";
 import { useEffect, useState } from "react"
 import {doc, getDoc, getFirestore}from "firebase/firestore"
-
+import { HashLoader } from "react-spinners"
 function Contenedordetalle({idDetalle}) {
     const [bike,setBike]= useState([])
 
@@ -12,14 +12,14 @@ function Contenedordetalle({idDetalle}) {
         getDoc(itemRef).then((snapshot)=>{
             if (snapshot.exists()) {
                 setBike({id:snapshot.id, ...snapshot.data()})
-                console.log(snapshot.data());
             }
         }).catch((error)=>console.log(error))
     },[])
-   console.log(bike);
+
     return(    
             <div className="mt-44 container-fluid">
-            <ItemDetail infoDetalle={bike}/>
+            {bike.length!=0?<ItemDetail infoDetalle={bike}/>:
+            <HashLoader className="mx-auto mt-28 mb-28" size={250}/>}
         </div>           
     )
 }

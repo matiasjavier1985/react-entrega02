@@ -2,6 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import {GiShoppingBag} from "react-icons/gi";
 import { HiOutlineX} from "react-icons/hi";
+import { NavLink } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
 
 
@@ -18,7 +19,7 @@ export default function cartWidget({widget}){
         setOpen(false);
     }
 
-    const{carrito,eliminarRopa,vaciarCarrito,contador,sumarCantidad,restarCantidad,precioTotal}= useCartContext()
+    const{carrito,eliminarbici,vaciarCarrito,contador,sumarCantidad,restarCantidad,precioTotal}= useCartContext()
     useEffect(()=>{
         contador==0 ? setProp("hidden"):setProp("show")
     }) 
@@ -113,7 +114,7 @@ export default function cartWidget({widget}){
 
                                                                     <div className="flex">
                                                                     <button
-                                                                        onClick={()=>eliminarRopa(product)}
+                                                                        onClick={()=>eliminarbici(product)}
                                                                         type="button"
                                                                         className="font-medium text-primario-600 hover:text-primario-500"
                                                                     >
@@ -134,14 +135,14 @@ export default function cartWidget({widget}){
                                                 <p>Subtotal</p>
                                                 <p>{`$ ${precioTotal}`}</p>
                                                 </div>
-                                                <div className="mt-6">
+                                                <NavLink to={"/cart"} className="mt-6">
                                                     <a
                                                     href="#"
                                                     className="flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700"
                                                     >
                                                     Ir a finalizar compra
                                                     </a>
-                                                </div>
+                                                </NavLink>
                                                 <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                                                     <p>
                                                         <button

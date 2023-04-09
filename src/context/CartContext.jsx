@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { addDoc, collection, doc, getFirestore, updateDoc } from "firebase/firestore";
 
 const CartContext = createContext();
 
@@ -8,7 +9,7 @@ export function CartContextProvider({children}) {
     const [carrito,setCarrito]=useState(() => {
         const datos = localStorage.getItem('carrito');
         return datos ? JSON.parse(datos) : []})
-    
+
     useEffect(() => {
         localStorage.setItem('carrito', JSON.stringify(carrito));
     }, [carrito]);
@@ -59,6 +60,37 @@ export function CartContextProvider({children}) {
 
     let precioTotal= carrito.reduce((acumulador,elemento)=>acumulador + (elemento.price * elemento.cantidad),0)
 
+    function actualizarOrden(productID,stockFinal) {
+        const item = doc(db,'items',productID)
+        updateDoc(item,{stock: stockFinal})
+    }
+    
+    const db = getFirestore()
+    
+    function enviarOrden(buyer) {
+        
+        const order = {
+            buyer,
+            items:carrito,
+            total:precioTotal,
+        }
+    
+        const collectionRef = collection (db,'orders')
+
+        addDoc(collectionRef,order)
+        .then((res)=>{
+            const orderID = res.id
+            alert(orderID)
+            carrito.map((producto)=>{
+                const stockFinal = producto.stock - producto.cantidad
+                actualizarOrden(producto.id,stockFinal)
+                vaciarCarrito()
+            })
+        })
+        .catch((error) => console.log({error}))
+    }
+
+
     return <CartContext.Provider 
     value={{
         agregarBike,
@@ -67,6 +99,7 @@ export function CartContextProvider({children}) {
         precioTotal,
         carrito,
         contador,
+        enviarOrden,
         sumarCantidad,
         restarCantidad,
         }}>
